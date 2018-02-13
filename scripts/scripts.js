@@ -58,13 +58,13 @@ function setPickingMode(){
 function loadAjax(page){
   switch (page) {
     case "new":
-    $("#addPlace").load("../places/new/addNew.html");
+    $("#addPlace").load("../places/views/new/addNew.html");
         break; 
     case "edit":
-    $("#listPlaces").load("../places/edit/listplaces.php");
+    $("#listPlaces").load("../places/views/edit/listplaces.php");
         break; 
     case "search":
-    $("#searchPlaces").load("../places/search/searchplaces.php");
+    $("#searchPlaces").load("../places/views/search/searchplaces.php");
         break; 
     default: 
     //Do nothing
