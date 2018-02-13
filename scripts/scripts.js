@@ -61,7 +61,7 @@ function loadAjax(page){
     $("#addPlace").load("../places/views/new/addNew.html");
         break; 
     case "edit":
-    $("#listPlaces").load("../places/views/edit/listplaces.php");
+    $("#listPlaces").load("../places/views/edit/edit.html");
         break; 
     case "search":
     $("#searchPlaces").load("../places/views/search/searchplaces.php");
