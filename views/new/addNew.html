@@ -43,3 +43,34 @@
         </div>
     </div>
 </form>
+
+<script>
+        $("#submitNew").click(function() {
+        var title = $("#title").val();
+        var description = $("#description").val();
+        var lat = $("#lat").val();
+        var lng = $("#lng").val();
+        var openinghour = $("#openinghour").val();
+        var closinghour = $("#closinghour").val();
+        if (title == '' || lat == '' || lng == '' || openinghour == '' || closinghour == '') {
+            alert("Please fill all required fields");
+        } else {
+        // Returns successful data submission message when the entered information is stored in database.
+        $.post("views/new/addNew.php", {
+            title: title,
+            description: description,
+            lat: lat,
+            lng: lng,
+            openinghour: openinghour,
+            closinghour: closinghour
+        }, function(data) {
+            alert(data);
+            $('#NewPlaceForm')[0].reset(); // To reset form fields
+        });
+        }
+    });
+
+    $("#NewPlaceForm").submit(function(e){
+        return false;
+    });
+</script>
