@@ -1,0 +1,19 @@
+/* Custom styles */
+#map {
+    height: 600px;
+    width: 100%;
+}
+
+textarea{
+    min-height: 65px;
+    max-height: 160px;
+}
+
+#pickFromMapBtn{
+    color: white;
+    text-decoration: none;
+}
+
+.pickingModeActive, .pickingModeActive *{
+    cursor: crosshair !important;
+}

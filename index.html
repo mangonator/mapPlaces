@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Google Map CRUD">
+    <meta name="author" content="Mikael Myhrberg">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Google Map CRUD</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- Links
+    https://developers.google.com/maps/documentation/javascript/info-windows-to-db -->
+
+  </head>
+
+  <body>
+
+    <header>
+      <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4 class="text-white">Google Maps Places</h4>
+              <p class="text-muted">Google Maps Javascript crud exercise.</p>
+            </div>
+            <div class="col-sm-4 offset-md-1 py-4">
+              <h4 class="text-white">Contact</h4>
+              <ul class="list-unstyled">
+                <li><a href="https://www.linkedin.com/in/mikaelmyhrberg/" class="text-white" target="_blank">LinkedIn</a></li>
+                <li><a href="mailto:mikael_92@msn.com?Subject=CRUD%20test%20site" class="text-white" target="_top">Email</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar navbar-dark bg-dark box-shadow">
+        <div class="container d-flex justify-content-between">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <i class="far fa-map mr-2"></i>
+            <strong>Google Maps Places</strong>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main role="main">
+        <div class="container">
+            <div class="row mb-3 mt-3">
+                <div class="col-5">
+                    <h3>Add / delete / edit here:</h3>
+
+                    <nav>
+                      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-new-tab" data-toggle="tab" href="#nav-new" role="tab" aria-controls="nav-new" aria-selected="true" onclick="loadAjax('new')">New</a>
+                        <a class="nav-item nav-link" id="nav-edit-tab" data-toggle="tab" href="#nav-edit" role="tab" aria-controls="nav-edit" aria-selected="false" onclick="loadAjax('edit')">Edit</a>
+                        <a class="nav-item nav-link" id="nav-search-tab" data-toggle="tab" href="#nav-search" role="tab" aria-controls="nav-search" aria-selected="false" onclick="loadAjax('search')">Search</a>
+                      </div>
+                    </nav>
+
+                    <div class="tab-content" id="nav-tabContent">
+                      <div class="tab-pane fade show active pt-3 pb-3" id="nav-new" role="tabpanel" aria-labelledby="nav-new-tab">
+                        <div id="addPlace"></div>
+                      </div>
+
+                      <div class="tab-pane fade pt-3 pb-3" id="nav-edit" role="tabpanel" aria-labelledby="nav-edit-tab">
+                        <h4>Edit / remove location</h4>
+                        <div id="listPlaces"></div>
+                      </div>
+
+                      <div class="tab-pane fade pt-3 pb-3" id="nav-search" role="tabpanel" aria-labelledby="nav-search-tab">
+                        <h4>Search places</h4>
+                        <div id="searchPlaces"></div>
+                      </div>
+
+                    </div>
+
+                </div>
+                <div class="col-7">
+                    <h3>Map here:</h3>
+                    <div id="map"></div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="text-muted">
+      <div class="container">
+        <p>2018</p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+    <script src="scripts/scripts.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoyY1rD8sGVA3Yo3HsAz3bp39MLLcNdmA&callback=initMap"></script>    
+</body>
+</html>
