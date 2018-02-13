@@ -1,0 +1,76 @@
+<h4>Add new location:</h4>
+<form id="NewPlaceForm" name="NewPlaceForm">
+    <div class="form-group">
+        <label for="place_title">Title*</label>
+        <input type="text" class="form-control" name="title" id="title" placeholder="">
+    </div>
+    <div class="form-group">
+        <label for="place_description">Description</label>
+        <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="place_coordinates">Map coordinates*</label>
+        <div class="form-row">
+            <div class="col">
+                <input type="text" class="form-control" name="lat" id="lat" placeholder="Latitude">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" name="lng" id="lng" placeholder="Longtitude">
+            </div>
+            <div class="col">
+                <a class="btn btn-primary" id="pickFromMapBtn" onclick="setPickingMode()">Pick from map</a>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+    <label for="place_title">Opening hours*</label>
+        <div class="form-row">
+            <div class="col">
+                <input type="text" class="form-control" name="openinghour" id="openinghour" placeholder="9:00">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" name="closinghour" id="closinghour" placeholder="15:00">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="place_tags">//TODO add tags</label>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <input class="btn btn-primary" type="button" id="submitNew" value="Save location">
+            <input class="btn btn-default" type="reset" value="Clear form">
+        </div>
+    </div>
+</form>
+
+<script>
+        $("#submitNew").click(function() {
+        var title = $("#title").val();
+        var description = $("#description").val();
+        var lat = $("#lat").val();
+        var lng = $("#lng").val();
+        var openinghour = $("#openinghour").val();
+        var closinghour = $("#closinghour").val();
+        if (title == '' || lat == '' || lng == '' || openinghour == '' || closinghour == '') {
+            alert("Please fill all required fields");
+        } else {
+        // Returns successful data submission message when the entered information is stored in database.
+        $.post("views/new/addNew.php", {
+            title: title,
+            description: description,
+            lat: lat,
+            lng: lng,
+            openinghour: openinghour,
+            closinghour: closinghour
+        }, function(data) {
+            alert(data);
+            $('#NewPlaceForm')[0].reset(); // To reset form fields
+        });
+        }
+    });
+
+    $("#NewPlaceForm").submit(function(e){
+        return false;
+    });
+</script>
