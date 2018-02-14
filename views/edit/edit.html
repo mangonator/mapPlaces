@@ -4,7 +4,74 @@
 
 <div class="row mb-3 mt-3"> 
     <div class="col-12" id="editFormDiv">
-        TODO: Edit form here
+        Edit:
+        <div class="collapse" id="editCollapse">
+            <div class="card card-body">
+                <h4>Edit selected place:</h4>
+                <form id="EditPlaceForm" name="EditPlaceForm">
+                        <div class="form-group">
+                            <label for="place_id">ID*</label>
+                            <input type="number" class="form-control" name="id" id="id" minlength="0" required readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="place_title">Title*</label>
+                            <input type="text" class="form-control" name="title" id="title" placeholder="" minlength="0" maxlength="60" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="place_description">Description</label>
+                            <textarea class="form-control" name="description" id="description" rows="3" maxlength="1000"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="place_coordinates">Map coordinates*</label>
+                            <div class="form-row">
+                                <div class="col">
+                                    <input type="number" class="form-control" name="lat" id="lat" placeholder="Latitude" min="0" max="256" required>
+                                </div>
+                                <div class="col">
+                                    <input type="number" class="form-control" name="lng" id="lng" placeholder="Longtitude" min="0" max="256" required>
+                                </div>
+                                <div class="col">
+                                    <a class="btn btn-primary" id="pickFromMapBtn" onclick="setPickingMode()">Pick from map</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                        <label for="place_title">Opening hours*</label>
+                            <div class="form-row">
+                                <div class="col">
+                                    <input type="time" class="form-control" name="openinghour" id="openinghour" value="09:00" required>
+                                </div>
+                                <div class="col">
+                                    <input type="time" class="form-control" name="closinghour" id="closinghour" value="15:00" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="place_tags">//TODO add tags</label>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <input class="btn btn-success" type="button" id="submitEdit" value="Save changes">
+                            </div>
+                        </div>
+                    </form>                   
+            </div>
+        </div>
+
+        Delete:
+        <div class="collapse" id="deleteCollapse">
+            <div class="card card-body">
+                <div class="card border-warning mb-3" style="max-width: 18rem;">
+                    <div class="card-body text-warning">
+                        <h5 class="card-title">Confirm deletion:</h5>
+                        <p class="card-text">Are you sure you want to delete <span id="placetitle"></span></p>
+                        <button class="btn btn-outline-danger" onclick="deletePlace()">Delete</button>
+                        <button class="btn btn-outline-default" onclick="cancelDelete()">Cancel</button>
+                    </div>
+                </div>            
+            </div>
+        </div>
+
     </div>  
 </div>
 
@@ -19,5 +86,69 @@
             $("#placesList").html(response); 
         }
         });
+    });
+
+    function openEditForm(id, title, description, openinghour, closinghour, lat, lng) {
+        //Open collapse
+        $('#editCollapse').collapse({
+            toggle: false
+        })
+        //Insert values to form
+        $("#id").val(id);
+        $("#title").val(title);
+        $("#description").val(description);
+        $("#openinghour").val(openinghour);
+        $("#closinghour").val(closinghour);
+        $("#lat").val(lat);
+        $("#lng").val(lng);
+    };
+
+    function openDeleteForm(id, title) {
+        //Open collapse
+        $('#deleteCollapse').collapse({
+            toggle: false
+        })
+        //Inset values to confirmation prompt
+        $("#placetitle").html(title);
+    };
+    function cancelDelete() {
+        //Open collapse
+        $('#deleteCollapse').collapse({
+            toggle: true
+        })
+        //Inset values to confirmation prompt
+        $("#placetitle").html("");
+    };
+
+    $("#submitEdit").click(function() {
+        var id = $("#id").val();
+        var title = $("#title").val();
+        var description = $("#description").val();
+        var lat = $("#lat").val();
+        var lng = $("#lng").val();
+        var openinghour = $("#openinghour").val();
+        var closinghour = $("#closinghour").val();
+        if (id == '' || title == '' || lat == '' || lng == '' || openinghour == '' || closinghour == '') {
+            alert("Please fill all required fields");
+        } else {
+        // Returns successful data submission message when the entered information is stored in database.
+        $.post("views/new/addNew.php", {
+            id: id,
+            title: title,
+            description: description,
+            lat: lat,
+            lng: lng,
+            openinghour: openinghour,
+            closinghour: closinghour
+        }, function(data) {
+            alert(data);
+            //Fetch markers and init map to refresh data
+            fetchMarkersFromDB();
+        });
+        }
+    });
+
+    $("#EditPlaceForm").submit(function(e){
+        return false;
     });
 </script>

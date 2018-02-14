@@ -10,13 +10,13 @@
     <div class="form-group">
         <label for="place_coordinates">Map coordinates*</label>
         <div class="form-row">
-            <div class="col">
+            <div class="col-6 col-lg-4">
                 <input type="number" class="form-control" name="lat" id="lat" placeholder="Latitude" min="0" max="256" required>
             </div>
-            <div class="col">
+            <div class="col-6 col-lg-4">
                 <input type="number" class="form-control" name="lng" id="lng" placeholder="Longtitude" min="0" max="256" required>
             </div>
-            <div class="col">
+            <div class="col-12 col-lg-4">
                 <a class="btn btn-primary" id="pickFromMapBtn" onclick="setPickingMode()">Pick from map</a>
             </div>
         </div>
@@ -24,10 +24,10 @@
     <div class="form-group">
     <label for="place_title">Opening hours*</label>
         <div class="form-row">
-            <div class="col">
+            <div class="col-12 col-lg-6">
                 <input type="time" class="form-control" name="openinghour" id="openinghour" value="09:00" required>
             </div>
-            <div class="col">
+            <div class="col-12 col-lg-6">
                 <input type="time" class="form-control" name="closinghour" id="closinghour" value="15:00" required>
             </div>
         </div>

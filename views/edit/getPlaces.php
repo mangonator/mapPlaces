@@ -6,7 +6,7 @@ require_once '../../config.php';
 $sql = "SELECT * FROM places";
 if($result = mysqli_query($link, $sql)){
     if(mysqli_num_rows($result) > 0){
-        echo "<table class='table table-striped'>";
+        echo "<table class='table table-striped table-sm'>";
             echo "<thead class='thead-light'>";
                 echo "<tr>";
                     echo "<th scope='col'>#</th>";
@@ -14,7 +14,7 @@ if($result = mysqli_query($link, $sql)){
                     echo "<th scope='col'>Description</th>";
                     echo "<th scope='col'>Hours</th>";
                     echo "<th scope='col'>lat/lng</th>";
-                    //echo "<th scope='col'>Actions</th>";
+                    echo "<th scope='col'>Actions</th>";
                 echo "</tr>";
             echo "</thead>";
             echo "<tbody>";
@@ -25,6 +25,7 @@ if($result = mysqli_query($link, $sql)){
                     echo "<td>" . $row['description'] . "</td>";
                     echo "<td>" . $row['openinghour'] . " - " . $row['closinghour'] . "</td>";
                     echo "<td>" . $row['lat'] . " , " . $row['lng'] . "</td>";
+                    echo "<td><button class='btn btn-link btn-sm' onclick='openEditForm(".$row['id'].", ".$row['title'].", ".$row['description'].", ".$row['openinghour'].", ".$row['closinghour'].", ".$row['lat'].", ".$row['lng'].")'><i class='far fa-edit'></i></button> | <button class='btn btn-link btn-sm' onclick='openDeleteForm(".$row['id'].", ".$row['title'].")'><i class='far fa-trash-alt'></i></button></td>"
                 echo "</tr>";
             }
             echo "</tbody>";                            
