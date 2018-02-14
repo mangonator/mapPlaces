@@ -9,15 +9,14 @@ $lat = mysqli_real_escape_string($link, $_REQUEST['lat']);
 $lng = mysqli_real_escape_string($link, $_REQUEST['lng']);
 $openinghour = mysqli_real_escape_string($link, $_REQUEST['openinghour']);
 $closinghour = mysqli_real_escape_string($link, $_REQUEST['closinghour']);
- 
-// attempt insert query execution
+// Perform query
 $sql = "INSERT INTO places (id, title, description, address, lat, lng, openinghour, closinghour) VALUES (NULL, '$title', '$description', '$address', '$lat', '$lng', '$openinghour', '$closinghour')";
+// Return status
 if(mysqli_query($link, $sql)){
-    echo "New place saved to database succesfully";
+    echo "200";
 } else{
     echo "ERROR: Unable to execute $sql. " . mysqli_error($link);
 }
- 
 // close connection
 mysqli_close($link);
 ?>

@@ -1,10 +1,5 @@
 <div class="row mb-3 mt-3"> 
-    <div class="col-12" id="placesList"></div>  
-</div>
-
-<div class="row mb-3 mt-3"> 
     <div class="col-12" id="editFormDiv">
-        Edit:
         <div class="collapse" id="editCollapse">
             <div class="card card-body">
                 <h4>Edit selected place:</h4>
@@ -57,22 +52,11 @@
                     </form>                   
             </div>
         </div>
-
-        Delete:
-        <div class="collapse" id="deleteCollapse">
-            <div class="card card-body">
-                <div class="card border-warning mb-3" style="max-width: 18rem;">
-                    <div class="card-body text-warning">
-                        <h5 class="card-title">Confirm deletion:</h5>
-                        <p class="card-text">Are you sure you want to delete <span id="placetitle"></span></p>
-                        <button class="btn btn-outline-danger" onclick="deletePlace()">Delete</button>
-                        <button class="btn btn-outline-default" onclick="cancelDelete()">Cancel</button>
-                    </div>
-                </div>            
-            </div>
-        </div>
-
     </div>  
+</div>
+
+<div class="row mb-3 mt-3"> 
+    <div class="col-12" id="placesList"></div>  
 </div>
 
 <script>
@@ -155,6 +139,28 @@
         });
         }
     });
+
+    function deletePlace(id){
+        if (id == '') {
+            alert("Id is missing, don't know where to delete from!");
+        } else {
+        $.post("views/edit/deletePlace.php", {
+            id: id
+        }, function(data) {
+            if (data == "200"){
+                //success
+                toastr.success('Deleted place with id = ' + id + ' from database', 'Place removed from database succesfully!');
+            } else {
+                //error
+                toastr.error('Error info: ' + data, 'ERROR while removing place from database :(');
+            }
+            //Update place list table
+            getPlaceList();
+            //Fetch markers and init map to refresh data   
+            fetchMarkersFromDB();
+        });
+        }
+    }
 
     $("#EditPlaceForm").submit(function(e){
         return false;
