@@ -33,7 +33,8 @@ function fetchMarkersFromDB(){
         initMap();
     },
     error: function(response){                    
-      alert("Fetching map markers from database failed, response: " + response);
+      //alert("Fetching map markers from database failed, response: " + response);
+      toastr.error('response: ' + response, 'Fetching map markers from database failed :(');
       //Init map anyways
       initMap();
   }
@@ -82,6 +83,7 @@ function GetCoordinatesFromMap(latLng, map) {
   coordinatePickingMode = false;
   $("#pickFromMapBtn").html("Pick from map");
   $("#map").removeClass("pickingModeActive");
+  toastr.info('lat: ' + latLng.lat() + ', lng: ' + latLng.lng(), 'Coordinates picked from map!');
 }
 //We only want to pick coordinates when button is pressed so we handle that with this function for now
 function setPickingMode(){
