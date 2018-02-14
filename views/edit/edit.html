@@ -4,12 +4,80 @@
 
 <div class="row mb-3 mt-3"> 
     <div class="col-12" id="editFormDiv">
-        TODO: Edit form here
+        Edit:
+        <div class="collapse" id="editCollapse">
+            <div class="card card-body">
+                <h4>Edit selected place:</h4>
+                <form id="EditPlaceForm" name="EditPlaceForm">
+                        <div class="form-group">
+                            <label for="place_id">ID*</label>
+                            <input type="number" class="form-control" name="idEdit" id="idEdit" minlength="0" required readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="place_title">Title*</label>
+                            <input type="text" class="form-control" name="titleEdit" id="titleEdit" placeholder="" minlength="0" maxlength="60" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="place_description">Description</label>
+                            <textarea class="form-control" name="descriptionEdit" id="descriptionEdit" rows="3" maxlength="1000"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="place_coordinates">Map coordinates*</label>
+                            <div class="form-row">
+                                <div class="col">
+                                    <input type="number" class="form-control" name="latEdit" id="latEdit" placeholder="Latitude" min="0" max="256" required>
+                                </div>
+                                <div class="col">
+                                    <input type="number" class="form-control" name="lngEdit" id="lngEdit" placeholder="Longtitude" min="0" max="256" required>
+                                </div>
+                                <div class="col">
+                                    <a class="btn btn-primary" id="pickFromMapBtn" onclick="setPickingMode()">Pick from map</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                        <label for="place_title">Opening hours*</label>
+                            <div class="form-row">
+                                <div class="col">
+                                    <input type="time" class="form-control" name="openinghourEdit" id="openinghourEdit" value="09:00" required>
+                                </div>
+                                <div class="col">
+                                    <input type="time" class="form-control" name="closinghourEdit" id="closinghourEdit" value="15:00" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="place_tags">//TODO add tags</label>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <input class="btn btn-success" type="button" id="submitEdit" value="Save changes">
+                            </div>
+                        </div>
+                    </form>                   
+            </div>
+        </div>
+
+        Delete:
+        <div class="collapse" id="deleteCollapse">
+            <div class="card card-body">
+                <div class="card border-warning mb-3" style="max-width: 18rem;">
+                    <div class="card-body text-warning">
+                        <h5 class="card-title">Confirm deletion:</h5>
+                        <p class="card-text">Are you sure you want to delete <span id="placetitle"></span></p>
+                        <button class="btn btn-outline-danger" onclick="deletePlace()">Delete</button>
+                        <button class="btn btn-outline-default" onclick="cancelDelete()">Cancel</button>
+                    </div>
+                </div>            
+            </div>
+        </div>
+
     </div>  
 </div>
 
 <script>
-    $(document).ready(function() {
+    
+    function getPlaceList(){
         $("#placesList").html("<div class='mx-auto'><i class='fas fa-spinner fa-pulse mr-2'></i><span>Loading places from database</span></div>");                 
         $.ajax({    //create an ajax request to getPlaces.php
         type: "GET",
@@ -19,5 +87,76 @@
             $("#placesList").html(response); 
         }
         });
+    }
+
+    $(document).ready(function() {
+        getPlaceList();
+    });
+
+    function openEditForm(id, title, description, openinghour, closinghour, lat, lng) {
+        //Open collapse
+        $('#editCollapse').collapse();
+        //Insert values to form
+        $("#idEdit").val(id);
+        $("#titleEdit").val(title);
+        $("#descriptionEdit").val(description);
+        $("#openinghourEdit").val(openinghour);
+        $("#closinghourEdit").val(closinghour);
+        $("#latEdit").val(lat);
+        $("#lngEdit").val(lng);
+    };
+
+    function openDeleteForm(id) {
+        //Open collapse
+        $('#deleteCollapse').collapse();
+        //Inset values to confirmation prompt
+        $("#placetitle").html(title);
+    };
+    function cancelDelete() {
+        //Open collapse
+        $('#deleteCollapse').collapse();
+        //Inset values to confirmation prompt
+        $("#placetitle").html("");
+    };
+
+    $("#submitEdit").click(function() {
+        var id = $("#idEdit").val();
+        var title = $("#titleEdit").val();
+        var description = $("#descriptionEdit").val();
+        var lat = $("#latEdit").val();
+        var lng = $("#lngEdit").val();
+        var openinghour = $("#openinghourEdit").val();
+        var closinghour = $("#closinghourEdit").val();
+        if (id == '' || title == '' || lat == '' || lng == '' || openinghour == '' || closinghour == '') {
+            alert("Please fill all required fields");
+        } else {
+        // Returns successful data submission message when the entered information is stored in database.
+        $.post("views/edit/editPlace.php", {
+            id: id,
+            title: title,
+            description: description,
+            address: "",
+            lat: lat,
+            lng: lng,
+            openinghour: openinghour,
+            closinghour: closinghour
+        }, function(data) {
+            if (data == "200"){
+                //success
+                toastr.success('Updated location ' + title + ' at position ' + lat + ' , ' + lng, 'Changes to place saved to database succesfully!');
+            } else {
+                //error
+                toastr.error('Error info: ' + data, 'ERROR while saving changes to database :(');
+            }
+            //Update place list table
+            getPlaceList();
+            //Fetch markers and init map to refresh data   
+            fetchMarkersFromDB();
+        });
+        }
+    });
+
+    $("#EditPlaceForm").submit(function(e){
+        return false;
     });
 </script>

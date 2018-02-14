@@ -1,4 +1,7 @@
 /* Custom styles */
+a, a:hover {
+  text-decoration: none !important; }
+
 #map {
   height: 600px;
   width: 100%; }
@@ -13,5 +16,8 @@ textarea {
 
 .pickingModeActive, .pickingModeActive * {
   cursor: crosshair !important; }
+
+#toast-container {
+  margin-top: 56px; }
 
 /*# sourceMappingURL=style.css.map */

@@ -10,13 +10,13 @@
     <div class="form-group">
         <label for="place_coordinates">Map coordinates*</label>
         <div class="form-row">
-            <div class="col">
+            <div class="col-6 col-lg-4">
                 <input type="number" class="form-control" name="lat" id="lat" placeholder="Latitude" min="0" max="256" required>
             </div>
-            <div class="col">
+            <div class="col-6 col-lg-4">
                 <input type="number" class="form-control" name="lng" id="lng" placeholder="Longtitude" min="0" max="256" required>
             </div>
-            <div class="col">
+            <div class="col-12 col-lg-4">
                 <a class="btn btn-primary" id="pickFromMapBtn" onclick="setPickingMode()">Pick from map</a>
             </div>
         </div>
@@ -24,10 +24,10 @@
     <div class="form-group">
     <label for="place_title">Opening hours*</label>
         <div class="form-row">
-            <div class="col">
+            <div class="col-12 col-lg-6">
                 <input type="time" class="form-control" name="openinghour" id="openinghour" value="09:00" required>
             </div>
-            <div class="col">
+            <div class="col-12 col-lg-6">
                 <input type="time" class="form-control" name="closinghour" id="closinghour" value="15:00" required>
             </div>
         </div>
@@ -44,6 +44,19 @@
 </form>
 
 <script>
+    toastr.options = {
+    "closeButton": true,
+    "positionClass": "toast-top-full-width",
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+    }
+
         $("#submitNew").click(function() {
         var title = $("#title").val();
         var description = $("#description").val();
@@ -63,7 +76,13 @@
             openinghour: openinghour,
             closinghour: closinghour
         }, function(data) {
-            alert(data);
+            if (data == "200"){
+                //success
+                toastr.success('Added location ' + title + ' at position ' + lat + " , " + lng, 'New place saved to database succesfully!');
+            } else {
+                //error
+                toastr.error('Error info: ' + data, 'ERROR while saving place to database :(');
+            }
             $('#NewPlaceForm')[0].reset(); // To reset form fields
             //Fetch markers and init map to refresh data
             fetchMarkersFromDB();
