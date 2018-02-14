@@ -44,6 +44,19 @@
 </form>
 
 <script>
+    toastr.options = {
+    "closeButton": true,
+    "positionClass": "toast-top-full-width",
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+    }
+
         $("#submitNew").click(function() {
         var title = $("#title").val();
         var description = $("#description").val();
@@ -63,7 +76,8 @@
             openinghour: openinghour,
             closinghour: closinghour
         }, function(data) {
-            alert(data);
+            //alert(data);
+            toastr.success('New place saved to database succesfully!', title + ' at position ' + lat + " , " + lng);
             $('#NewPlaceForm')[0].reset(); // To reset form fields
             //Fetch markers and init map to refresh data
             fetchMarkersFromDB();
