@@ -4,6 +4,7 @@ require_once '../../config.php';
 $sql = "SELECT * FROM places ORDER BY id ASC";
 if($result = mysqli_query($link, $sql)){
     if(mysqli_num_rows($result) > 0){
+        // Print table
         echo "<table class='table table-hover table-sm'>";
             echo "<thead class='thead-light'>";
                 echo "<tr class='d-flex'>";
@@ -20,6 +21,7 @@ if($result = mysqli_query($link, $sql)){
                     echo "<td class='col-xs-6 col-sm-4 col-md-3 col-lg-3'>" . $row['title'] . "</td>";
                     echo "<td class='d-none d-sm-block col-sm-4 col-md-5 col-lg-5 text-truncate'>" . $row['description'] . "</td>";
 
+                    // Insert parameters for update function into a variable
                     $parameters = $row['id'].",\"".$row['title']."\",\"".$row['description']."\",\"".$row['openinghour']."\",\"".$row['closinghour']."\",\"".$row['lat']."\",\"".$row['lng']."\"";
 
                     echo "<td class='col-xs-5 col-sm-3 col-md-3 col-lg-3 text-right'>
@@ -34,7 +36,7 @@ if($result = mysqli_query($link, $sql)){
                             </button>
                         </td>";
                 echo "</tr>";
-                //Place data display row
+                // Place data display row
                 echo "<tr class='table-info collapse' id='infoRow".$row['id']."'>";
                 echo "<td colspan='4'>
                         <div class='row'>
@@ -51,7 +53,7 @@ if($result = mysqli_query($link, $sql)){
                         </div>
                       </td>";
                 echo "</tr>";
-                //Deletion confirmation promt row
+                // Deletion confirmation promt row
                 echo "<tr class='table-warning text-center collapse' id='deletePromptRow".$row['id']."'>";
                 echo "<td colspan='4'>
                         <span>Are you sure you want to delete ".$row['title']."?</span>

@@ -60,7 +60,7 @@
 </div>
 
 <script>
-    
+    // Get list of added places from database and insert into page
     function getPlaceList(){
         $("#placesList").html("<div class='mx-auto'><i class='fas fa-spinner fa-pulse mr-2'></i><span>Loading places from database</span></div>");                 
         $.ajax({    //create an ajax request to getPlaces.php
@@ -73,10 +73,12 @@
         });
     }
 
+    // Call getPlaceList() when tab loads
     $(document).ready(function() {
         getPlaceList();
     });
 
+    // Display editForm collapse and populate form
     function openEditForm(id, title, description, openinghour, closinghour, lat, lng) {
         //Open collapse
         $('#editCollapse').collapse();
@@ -90,19 +92,20 @@
         $("#lngEdit").val(lng);
     };
 
-    function openDeleteForm(id) {
-        //Open collapse
-        $('#deleteCollapse').collapse();
-        //Inset values to confirmation prompt
-        $("#placetitle").html(title);
-    };
-    function cancelDelete() {
-        //Open collapse
-        $('#deleteCollapse').collapse();
-        //Inset values to confirmation prompt
-        $("#placetitle").html("");
-    };
+    // function openDeleteForm(id) {
+    //     //Open collapse
+    //     $('#deleteCollapse').collapse();
+    //     //Inset values to confirmation prompt
+    //     $("#placetitle").html(title);
+    // };
+    // function cancelDelete() {
+    //     //Open collapse
+    //     $('#deleteCollapse').collapse();
+    //     //Inset values to confirmation prompt
+    //     $("#placetitle").html("");
+    // };
 
+    // Submit editForm to editPlace.php for database update
     $("#submitEdit").click(function() {
         var id = $("#idEdit").val();
         var title = $("#titleEdit").val();
@@ -126,20 +129,21 @@
             closinghour: closinghour
         }, function(data) {
             if (data == "200"){
-                //success
+                // success
                 toastr.success('Updated location ' + title + ' at position ' + lat + ' , ' + lng, 'Changes to place saved to database succesfully!');
             } else {
-                //error
+                // error
                 toastr.error('Error info: ' + data, 'ERROR while saving changes to database :(');
             }
-            //Update place list table
+            // Update place list table
             getPlaceList();
-            //Fetch markers and init map to refresh data   
+            // Fetch markers and init map to refresh data   
             fetchMarkersFromDB();
         });
         }
     });
 
+    // Function for deleting place by ID using deletePlace.php
     function deletePlace(id){
         if (id == '') {
             alert("Id is missing, don't know where to delete from!");
@@ -148,20 +152,21 @@
             id: id
         }, function(data) {
             if (data == "200"){
-                //success
+                // success
                 toastr.success('Deleted place with id = ' + id + ' from database', 'Place removed from database succesfully!');
             } else {
-                //error
+                // error
                 toastr.error('Error info: ' + data, 'ERROR while removing place from database :(');
             }
-            //Update place list table
+            // Update place list table
             getPlaceList();
-            //Fetch markers and init map to refresh data   
+            // Fetch markers and init map to refresh data   
             fetchMarkersFromDB();
         });
         }
     }
 
+    // Prevent default form action
     $("#EditPlaceForm").submit(function(e){
         return false;
     });

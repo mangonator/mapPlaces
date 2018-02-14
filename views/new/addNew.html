@@ -1,3 +1,4 @@
+<!-- Form for adding a new place -->
 <form id="NewPlaceForm" name="NewPlaceForm">
     <div class="form-group">
         <label for="place_title">Title*</label>
@@ -33,7 +34,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="place_tags">//TODO add tags</label>
+        <label for="place_tags">//TODO add tags, sorry I ran out of time</label>
     </div>
     <div class="row">
         <div class="col-12">
@@ -44,20 +45,22 @@
 </form>
 
 <script>
+    // Options for our toaster
     toastr.options = {
-    "closeButton": true,
-    "positionClass": "toast-top-full-width",
-    "showDuration": "300",
-    "hideDuration": "1000",
-    "timeOut": "5000",
-    "extendedTimeOut": "1000",
-    "showEasing": "swing",
-    "hideEasing": "linear",
-    "showMethod": "fadeIn",
-    "hideMethod": "fadeOut"
+        "closeButton": true,
+        "positionClass": "toast-top-full-width",
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
     }
 
-        $("#submitNew").click(function() {
+    // Submit NewPlaceForm to addNew.php for database insertion
+    $("#submitNew").click(function() {
         var title = $("#title").val();
         var description = $("#description").val();
         var lat = $("#lat").val();
@@ -77,14 +80,15 @@
             closinghour: closinghour
         }, function(data) {
             if (data == "200"){
-                //success
+                // success
                 toastr.success('Added location ' + title + ' at position ' + lat + " , " + lng, 'New place saved to database succesfully!');
             } else {
-                //error
+                // error
                 toastr.error('Error info: ' + data, 'ERROR while saving place to database :(');
             }
-            $('#NewPlaceForm')[0].reset(); // To reset form fields
-            //Fetch markers and init map to refresh data
+            // Reset form fields
+            $('#NewPlaceForm')[0].reset();
+            // Fetch markers and init map to refresh data
             fetchMarkersFromDB();
         });
         }
