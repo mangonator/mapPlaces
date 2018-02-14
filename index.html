@@ -55,7 +55,7 @@
     <main role="main">
         <div class="container-fluid">
             <div class="row mb-3 mt-3">
-                <div class="col-xs-12 col-md-5">
+                <div class="col-12 col-xl-5">
                     <h3>Add / delete / edit here:</h3>
 
                     <nav>
@@ -68,11 +68,12 @@
 
                     <div class="tab-content" id="nav-tabContent">
                       <div class="tab-pane fade show active pt-3 pb-3" id="nav-new" role="tabpanel" aria-labelledby="nav-new-tab">
+                        <h4>Add new location:</h4>
                         <div id="addPlace"></div>
                       </div>
 
                       <div class="tab-pane fade pt-3 pb-3" id="nav-edit" role="tabpanel" aria-labelledby="nav-edit-tab">
-                        <h4>Edit / remove location</h4>
+                        <h4>Choose a place to edit or delete:</h4>
                         <div id="listPlaces"></div>
                       </div>
 
@@ -84,7 +85,7 @@
                     </div>
 
                 </div>
-                <div class="col-xs-12 col-md-7">
+                <div class="col-12 col-xl-7">
                     <h3>Map here:</h3>
                     <div id="map"></div>
                 </div>
@@ -108,6 +109,6 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
     <script src="scripts/scripts.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoyY1rD8sGVA3Yo3HsAz3bp39MLLcNdmA&callback=initMap"></script>    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoyY1rD8sGVA3Yo3HsAz3bp39MLLcNdmA"></script>    
 </body>
 </html>

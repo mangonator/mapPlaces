@@ -1,17 +1,59 @@
 /* Scripts */
 var coordinatePickingMode = false;
+var testResults = [{lat: 60.169290, lng: 24.928217}, {lat: 60.169497, lng: 24.933689}, {lat: 60.170768, lng: 24.941535}, {lat: 60.175841, lng: 24.804531}];
+var locationsFromDB = [];
+
+//AJAX content loading
+function loadAjax(page){
+  switch (page) {
+    case "new":
+    $("#addPlace").load("../places/views/new/addNew.html");
+        break; 
+    case "edit":
+    $("#listPlaces").load("../places/views/edit/edit.html");
+        break; 
+    case "search":
+    $("#searchPlaces").load("../places/views/search/searchplaces.php");
+        break; 
+    default: 
+    //Do nothing
+  }
+}
+
+function fetchMarkersFromDB(){
+  loadAjax('new');
+  $.ajax({
+    type: "GET",
+    url: "getMapMarkers.php",     
+    dataType: 'json',    
+    success: function(response){                    
+        locationsFromDB = response;
+        console.log(locationsFromDB);
+        //Init map
+        initMap();
+    },
+    error: function(response){                    
+      alert("Fetching map markers from database failed, response: " + response);
+      //Init map anyways
+      initMap();
+  }
+  }); 
+}
+
+$( document ).ready(function() {
+  fetchMarkersFromDB();
+});
 
 //Initialize map
 function initMap() {
-  var testlocation = {lat: 60.169116, lng: 24.929076};
-  var testResults = [{lat: 60.169290, lng: 24.928217}, {lat: 60.169497, lng: 24.933689}, {lat: 60.170768, lng: 24.941535}, {lat: 60.175841, lng: 24.804531}];
+  console.log("init map here");
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 13,
     center: new google.maps.LatLng(60.169116,24.929076)
   });
   //Loop test locations to map
-  for (var i = 0; i < testResults.length; i++) {
-    var latLng = new google.maps.LatLng(testResults[i].lat,testResults[i].lng);
+  for (var i = 0; i < locationsFromDB.length; i++) {
+    var latLng = new google.maps.LatLng(locationsFromDB[i].lat,locationsFromDB[i].lng);
     var marker = new google.maps.Marker({
         position: latLng,
         map: map
@@ -53,24 +95,3 @@ function setPickingMode(){
     $("#map").removeClass("pickingModeActive");
   }
 }
-
-//AJAX content loading
-function loadAjax(page){
-  switch (page) {
-    case "new":
-    $("#addPlace").load("../places/views/new/addNew.html");
-        break; 
-    case "edit":
-    $("#listPlaces").load("../places/views/edit/listplaces.php");
-        break; 
-    case "search":
-    $("#searchPlaces").load("../places/views/search/searchplaces.php");
-        break; 
-    default: 
-    //Do nothing
-  }
-}
-
-$( document ).ready(function() {
-  loadAjax('new');
-});

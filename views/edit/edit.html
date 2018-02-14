@@ -1,0 +1,23 @@
+<div class="row mb-3 mt-3"> 
+    <div class="col-12" id="placesList"></div>  
+</div>
+
+<div class="row mb-3 mt-3"> 
+    <div class="col-12" id="editFormDiv">
+        TODO: Edit form here
+    </div>  
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("#placesList").html("<div class='mx-auto'><i class='fas fa-spinner fa-pulse mr-2'></i><span>Loading places from database</span></div>");                 
+        $.ajax({    //create an ajax request to getPlaces.php
+        type: "GET",
+        url: "views/edit/getPlaces.php",             
+        dataType: "html",   //expect html to be returned                
+        success: function(response){                    
+            $("#placesList").html(response); 
+        }
+        });
+    });
+</script>
