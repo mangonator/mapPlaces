@@ -58,13 +58,11 @@
         <div class="container-fluid">
             <div class="row mb-3 mt-3">
                 <div class="col-12 col-xl-5">
-                    <h3>Add / delete / edit here:</h3>
 
                     <nav>
                       <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" id="nav-new-tab" data-toggle="tab" href="#nav-new" role="tab" aria-controls="nav-new" aria-selected="true" onclick="loadAjax('new')">New</a>
-                        <a class="nav-item nav-link" id="nav-edit-tab" data-toggle="tab" href="#nav-edit" role="tab" aria-controls="nav-edit" aria-selected="false" onclick="loadAjax('edit')">Edit</a>
-                        <a class="nav-item nav-link" id="nav-search-tab" data-toggle="tab" href="#nav-search" role="tab" aria-controls="nav-search" aria-selected="false" onclick="loadAjax('search')">Search</a>
+                        <a class="nav-item nav-link" id="nav-edit-tab" data-toggle="tab" href="#nav-edit" role="tab" aria-controls="nav-edit" aria-selected="false" onclick="loadAjax('edit')">Edit / Delete</a>
                       </div>
                     </nav>
 
@@ -79,16 +77,10 @@
                         <div id="listPlaces"></div>
                       </div>
 
-                      <div class="tab-pane fade pt-3 pb-3" id="nav-search" role="tabpanel" aria-labelledby="nav-search-tab">
-                        <h4>Search places</h4>
-                        <div id="searchPlaces"></div>
-                      </div>
-
                     </div>
 
                 </div>
                 <div class="col-12 col-xl-7">
-                    <h3>Map here:</h3>
                     <div id="map"></div>
                 </div>
             </div>

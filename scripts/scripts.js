@@ -12,9 +12,6 @@ function loadAjax(page){
     case "edit":
     $("#listPlaces").load("../places/views/edit/edit.html");
         break; 
-    case "search":
-    $("#searchPlaces").load("../places/views/search/searchplaces.php");
-        break; 
     default: 
     //Do nothing
   }

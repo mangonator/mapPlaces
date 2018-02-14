@@ -3,7 +3,8 @@ a, a:hover {
   text-decoration: none !important; }
 
 #map {
-  height: 600px;
+  min-height: 600px;
+  height: 100%;
   width: 100%; }
 
 textarea {
@@ -19,5 +20,13 @@ textarea {
 
 #toast-container {
   margin-top: 56px; }
+
+td {
+  word-wrap: break-word; }
+
+.v-center {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%); }
 
 /*# sourceMappingURL=style.css.map */
