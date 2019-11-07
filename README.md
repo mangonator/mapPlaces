@@ -2,6 +2,10 @@
 
 <h3>Important notice!</h3>
 <p>This porject is no longer active, and the the Google Maps JS API key found in the code as well as in the demo site will no longer work. <b>You will need to have your own API key and use that in the code</b></p>
+<p>Insert your API key to line 105 in index.html (and possibly in other places, I cannot remember right now)</p>
+<pre>
+<script src="https://maps.googleapis.com/maps/api/js?key=[key-here]"></script>
+</pre>
 
 <h2>A little info about the project:</h2> 
 
