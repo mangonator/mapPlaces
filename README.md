@@ -1,5 +1,8 @@
 # mapPlaces - My Google Maps JS API CRUD application demo
 
+<h3>Important notice!</h3>
+<p>This porject is no longer active, and the the Google Maps JS API key found in the code as well as in the demo site will no longer work. <b>You will need to have your own API key and use that in the code</b></p>
+
 <h2>A little info about the project:</h2> 
 
 <p>This application was created as a demo for a job position.</p>
@@ -25,6 +28,6 @@
     <li><a href="http://php.net/" target="_blank">PHP 7.1</a></li>       
 </ul>
 <br>
-<p>The application can also be tested at <a href="http://mikaeljm.com/places/" target="_blank">http://mikaeljm.com/places/</a></p>
+<p>The application can also be tested at <a href="http://mikaeljm.com/places/" target="_blank">http://mikaeljm.com/places/</a>. Please limit the amount of test places to 2, thank you. You can delete old places you no longer need.</p>
 <br>
 <p>- Mikael</p>
